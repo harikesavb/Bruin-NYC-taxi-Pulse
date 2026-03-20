@@ -1,4 +1,4 @@
-# NYC Taxi Pulse
+# Bruin-NYC-taxi-Pulse
 
 NYC Taxi Pulse is a Bruin + DuckDB pipeline that ingests NYC TLC trip data, cleans it, and creates daily taxi KPIs.
 
@@ -78,24 +78,9 @@ Full year:
 bruin run ./nyc_taxi_pulse/pipeline/pipeline.yml --environment default --start-date 2025-01-01 --end-date 2025-12-31
 ```
 
-## Verify Output (Optional)
-
-```powershell
-@'
-import duckdb
-con = duckdb.connect(r'./nyc_taxi_pulse/nyc_taxi_pulse.duckdb')
-print(con.execute('SELECT COUNT(*) FROM ingestion.trips').fetchone())
-print(con.execute('SELECT COUNT(*) FROM staging.trips_clean').fetchone())
-print(con.execute('SELECT COUNT(*) FROM reports.trips_daily_report').fetchone())
-'@ | python -
-```
 
 ## Notes
 
 - Pipeline schedule is `daily` in `pipeline/pipeline.yml`.
 - `taxi_types` defaults to `["yellow"]`.
 - Reset taxi type override when needed:
-
-```powershell
-Remove-Item Env:BRUIN_VARS
-```
