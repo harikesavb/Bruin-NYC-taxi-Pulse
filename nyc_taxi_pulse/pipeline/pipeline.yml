@@ -1,0 +1,12 @@
+name: nyc_taxi_pulse_pipeline
+schedule: daily
+start_date: "2024-01-01"
+default_connections:
+  duckdb: duckdb-default
+variables:
+  taxi_types:
+    type: array
+    items:
+      type: string
+    default:
+      - yellow

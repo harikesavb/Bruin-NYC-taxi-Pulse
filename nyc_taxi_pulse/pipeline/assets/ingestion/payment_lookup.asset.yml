@@ -1,0 +1,19 @@
+name: ingestion.payment_lookup
+type: duckdb.seed
+
+parameters:
+  path: payment_lookup.csv
+
+columns:
+  - name: payment_type_id
+    type: integer
+    description: TLC payment type identifier.
+    primary_key: true
+    checks:
+      - name: not_null
+      - name: unique
+  - name: payment_type_name
+    type: string
+    description: Human-readable payment type.
+    checks:
+      - name: not_null
